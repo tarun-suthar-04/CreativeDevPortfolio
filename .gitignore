@@ -1,0 +1,30 @@
+# Python environments and cache
+.venv/
+**/.venv/
+venv/
+**/venv/
+__pycache__/
+*.py[cod]
+
+# Django local data and generated assets
+*.sqlite3
+media/
+**/media/
+staticfiles/
+**/staticfiles/
+
+# Secrets
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Future frontend build output
+node_modules/
+.next/
+out/
+
+# Private reference material; keep the PDF local
+/Tarun_Suthar_Resume_SDE_I.pdf
