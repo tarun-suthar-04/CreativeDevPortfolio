@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block body %}
+  <h1>Creative</h1>
+  <a href="{% url 'landing' %}">Back</a>
+  <ul>
+    {% for w in works %}
+      <li>{{ w.title }} ({{ w.category }}, {{ w.aspect }})</li>
+    {% empty %}
+      <li>No works yet. Add some in the admin.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

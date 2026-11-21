@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from .models import SiteSettings
 
-# Create your views here.
+
+def landing(request):
+    return render(request, "landing.html", {"site": SiteSettings.objects.first()})

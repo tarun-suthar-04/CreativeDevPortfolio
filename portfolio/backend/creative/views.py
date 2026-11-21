@@ -1,3 +1,10 @@
 from django.shortcuts import render
+from core.models import SiteSettings
+from .models import Work
 
-# Create your views here.
+
+def creative(request):
+    return render(request, "creative.html", {
+        "site": SiteSettings.objects.first(),
+        "works": Work.objects.all(),
+    })

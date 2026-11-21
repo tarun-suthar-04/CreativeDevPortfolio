@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block body %}
+  <h1>Technical</h1>
+  <a href="{% url 'landing' %}">Back</a>
+  {% for g in skills %}
+    <h3>{{ g }}</h3>
+    <ul>{% for s in g.skill_list %}<li>{{ s }}</li>{% endfor %}</ul>
+  {% endfor %}
+  {% for p in projects %}
+    <h3>{{ p.name }}</h3>
+    <p>{{ p.summary }}</p>
+    <ul>{% for b in p.bullet_list %}<li>{{ b }}</li>{% endfor %}</ul>
+    <p>{{ p.tech_list|join:", " }}</p>
+  {% endfor %}
+  <table border="1">
+    {% for e in education %}
+      <tr><td>{{ e.qualification }}</td><td>{{ e.institution }}</td><td>{{ e.year }}</td><td>{{ e.result }}</td></tr>
+    {% endfor %}
+  </table>
+  <ul>{% for c in creds %}<li>{{ c.get_kind_display }}: {{ c.text }}</li>{% endfor %}</ul>
+{% endblock %}
