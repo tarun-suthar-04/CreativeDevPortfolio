@@ -4,9 +4,9 @@ Instructions for AI coding agents (Claude Code, Codex, Cursor, etc.) working in 
 
 ## Project phases
 Always ask which phase the owner is in before suggesting code.
-1. Phase 1: Django full-stack site in `backend/` (templates, admin)
-2. Phase 2: JSON API added to `backend/` with Django REST Framework
-3. Phase 3: Next.js frontend in `frontend/` consuming the API; Django admin stays the CMS
+1. Phase 1: Django full-stack site in `portfolio/backend/` (templates, admin, CSS, JS)
+2. Phase 2: JSON API added to `portfolio/backend/` with Django REST Framework
+3. Phase 3: Next.js frontend in `portfolio/frontend/` consuming the API; Django admin stays the CMS
 Do not start a later phase early, and do not remove Phase 1 code until Phase 3 is deployed and working.
 
 ## Project
@@ -22,14 +22,16 @@ The owner is learning Django by building this. So:
 - When the owner asks "how", teach first. Write the full solution only if asked.
 
 ## Stack
-Backend (`backend/`): see below. Frontend (`frontend/`, Phase 3): Next.js App Router, TypeScript, CSS Modules (no Tailwind), Framer Motion, `next/font`, `next/image`.
+Backend (`portfolio/backend/`): see below. Frontend (`portfolio/frontend/`, Phase 3): Next.js App Router, TypeScript, CSS Modules (no Tailwind), Framer Motion, `next/font`, `next/image`.
 - Python 3.11+, Django 5.2 LTS (check before upgrading), SQLite in dev
 - Apps: `core`, `creative`, `technical`
 - Plain HTML templates, plain CSS, vanilla JS. No frontend framework, no Tailwind, no build step.
 - Pillow for images, WhiteNoise for static files, python-dotenv for settings
 
 ## Commands
+Run commands inside `portfolio/backend/`:
 ```bash
+cd portfolio/backend
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
 python manage.py runserver
 python manage.py makemigrations && python manage.py migrate
@@ -40,7 +42,7 @@ python manage.py collectstatic
 
 ## Frontend commands (Phase 3)
 ```bash
-cd frontend
+cd portfolio/frontend
 npm install
 npm run dev        # http://localhost:3000
 npm run lint && npm run build

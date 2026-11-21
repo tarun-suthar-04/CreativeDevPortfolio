@@ -3,20 +3,22 @@
 Goal: rebuild the split-screen portfolio (Creative + Technical) as a Django project you can edit from the admin panel. The landing uses a text wordmark only; do not add the round face logo or illustrated character to the landing or detail pages.
 This is a guided path with a verification snapshot below. The Django foundation is initialized, but the portfolio pages and content models are still pending.
 
-## Current setup verification — 2026-11-14
+## Current setup verification — 2026-11-21
 
-The current project is under `portfolio/backend/`. The checks below were run against that directory:
+The project lives under `portfolio/backend/`. The status below reflects commits `7697580`, `6b5d99d`, and `f984df2`:
 
-- Python 3.11.1 and Django 5.2.19 are installed in `portfolio/backend/.venv`; the listed Django, Pillow, dotenv, WhiteNoise, and Gunicorn packages import successfully.
-- `.env` exists with `SECRET_KEY` and `DEBUG`; settings load a non-default secret and `DEBUG=True`. `.env`, `.venv/`, and `db.sqlite3` are ignored by Git.
-- `python manage.py check` passes. `makemigrations --check --dry-run` reports no model changes, and all currently defined migrations are applied.
-- SQLite is configured. One Django superuser exists. `/admin/login/` responds in Django's in-process test client.
-- The root currently displays Django's debug installation page. A live `runserver` socket could not be confirmed from this environment, so verify it in the owner's terminal.
-- `core.SiteSettings` exists and is registered in admin, but the current database contains no `SiteSettings` row.
-- `creative` and `technical` are only app shells. They have no models or migrations yet. There are no landing, Creative, or Technical views/templates, and no API or Next.js frontend.
-- `portfolio/backend/templates/` is missing even though settings point to it. `portfolio/backend/static/` exists but is empty. WhiteNoise is currently last in `MIDDLEWARE`; this guide places it immediately after `SecurityMiddleware`, so correct that before relying on WhiteNoise for static serving.
+- Python 3.11+ and Django 5.2.19 are installed in `portfolio/backend/.venv`; packages Django, Pillow, python-dotenv, WhiteNoise, and Gunicorn import cleanly.
+- `.env` exists with non-default `SECRET_KEY` and `DEBUG=1`. `.env`, `.venv/`, and `db.sqlite3` are ignored by Git.
+- `python manage.py check` reports 0 issues.
+- `WhiteNoiseMiddleware` is placed immediately after `SecurityMiddleware` in `config/settings.py` (fixed in commit `6b5d99d`).
+- `core`, `creative`, and `technical` models are fully defined and registered in admin (`core.SiteSettings`, `creative.Work`, `technical.SkillGroup`, `Project`, `Education`, `Credential`).
+- Migrations are generated and applied in the SQLite database (`core`, `creative`, `technical`).
+- URLs are routed in `config/urls.py` for `/` (landing), `/creative/`, `/technical/`, `/admin/`, and media static serving.
+- Views are connected in `core/views.py`, `creative/views.py`, and `technical/views.py`.
+- Templates directory `portfolio/backend/templates/` contains functional skeleton templates: `base.html`, `landing.html`, `creative.html`, and `technical.html`.
+- `portfolio/backend/static/` directory exists for the upcoming CSS and JS assets.
 
-**Verdict:** the Django scaffold and database setup are mostly complete; Phase 1 portfolio implementation has not started. The checklist records the remaining setup gaps.
+**Verdict:** The Django backend foundation, ORM models, admin registrations, views, URLs, and plain HTML templates are complete. The next milestone is authoring the CSS/JS styling and interactions (50/50 split landing, themes, drag/swipe, digit canvas, and work strips) and populating initial content in the admin.
 
 ## Roadmap 
 | Phase | What you build | What you learn |
